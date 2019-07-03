@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <create-ideas></create-ideas>
+    <user-entry @connected="open"></user-entry>
+    <create-ideas v-if="sbody" :sbody="sbody" :userName="userName"></create-ideas>
     <all-ideas></all-ideas>  
   </div>
 </template>
@@ -9,17 +10,33 @@
 // @ is an alias to /src
 import AllIdeas from '../components/AllIdeas.vue'
 import CreateIdeas from '../components/CreateIdeas.vue'
+import UserEntry from '../components/UserEntry.vue'
 import store from '@/store.js'
 export default {
   name: 'Home',
   store,
+  data(){
+    return{
+      sbody: false,
+      userName:''
+    }
+  },
   computed: {
     
-    
+  },
+  methods: {
+    open(userName){
+      this.sbody = true
+      this.userName = userName
+    }
+  },
+  mounted(){
+    this.sbody = false
   },
   components: {
     AllIdeas,
-    CreateIdeas
+    CreateIdeas,
+    UserEntry
   }
   
 }

@@ -10,7 +10,9 @@ const vuexLocal = new VuexPersistence({
 const state = {
   ideas: [],
   now: [],
-  later: []
+  later: [],
+  users: [],
+  currentUser: ''
 }
 const getters = {
   getAllIdeas(state){
@@ -21,6 +23,9 @@ const getters = {
   },
   getLater(state){
     return state.later
+  },
+  findUser(state, userName){
+    return state.users.userName
   }
 }
 
@@ -64,6 +69,14 @@ const mutations = {
   setNewLater(state, payload){
     console.log('MUTlater', payload)
     state.later = [ ...payload ]
+  },
+  addUser(state, userName){
+    //state.users =[]
+    console.log('USERNAME TO STORE', userName)
+    state.users.push(userName)
+  },
+  updateCurrentUser(state, userName){
+    state.currentUser = userName
   }
 }
 
